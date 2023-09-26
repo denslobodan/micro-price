@@ -1,5 +1,6 @@
-// 1:12
-// https://www.youtube.com/watch?v=367qYRy39zw&t=3162s
+// part 1: all
+// part 2: 00:00
+// https://www.youtube.com/watch?v=D0St2LH158Q
 // http://localhost:3030/?ticker=ETH
 package main
 
@@ -8,18 +9,10 @@ import (
 )
 
 func main() {
-	/* client := client.New("http://localhost:3030")
+	port := flag.String("port", ":3030", "listen address the service is running")
+	flag.Parse()
 
-	price, err := client.FetchPrice(context.Background(), "ETH")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%+v\n", price)
-	return
-	*/
-	listenAddr := flag.String("listenAddr", ":3030", "listen address the srvice is running")
-	svc := NewLoggingService(NewMetricSevice(&priceFetch{}))
-
-	server := NewJSONAPIServer(*listenAddr, svc)
+	svc := loggingService{priceService{}}
+	server := NewJSONAPIServer(*port, svc)
 	server.Run()
 }
