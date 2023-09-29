@@ -9,32 +9,33 @@ import (
 )
 
 var prices = map[string]float64{
-	"BTC": 20_000.0,
 	"ETH": 999.99,
-	"GG":  100_000.0,
+	"BTC": 20000.0,
+	"GG":  1000000.0,
 }
 
-// PriceFetcher is an interface that can fetch a price.
-type PriceFetcher interface {
-	FetchPrice(context.Context, string) (float64, error)
+// PriceService is an interface that can fetch the price for any given ticker.
+type PriceService interface {
+	FetchPrice(ctx context.Context, ticker string) (price float64, err error)
 }
 
-// priceService implements the PriceFfetcher interface.
 type priceService struct{}
 
-func (s *priceService) FetchPrice(_ context.Context, ticker string) (float64, error) {
+// is the business logic
+func (s *priceService) FetchPrice(_ context.Context, ticker string) (price float64, err error) {
 	price, ok := prices[ticker]
 	if !ok {
 		return 0.0, fmt.Errorf("price for ticker (%s) is not available", ticker)
 	}
+
 	return price, nil
 }
 
-type logginingService struct {
+type loggingService struct {
 	priceService
 }
 
-func (s logginingService) FetchPrice(ctx context.Context, ticker string) (price float64, err error) {
+func (s loggingService) FetchPrice(ctx context.Context, ticker string) (price float64, err error) {
 	defer func(begin time.Time) {
 		reqID := ctx.Value("requestID")
 
