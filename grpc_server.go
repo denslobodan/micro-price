@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"math/rand"
 	"net"
 	"pricefetcher/proto"
 
@@ -34,6 +35,9 @@ func NewGRPCPriceFetcherServer(svc PriceService) *GRPCPriceFetcherServer {
 }
 
 func (s *GRPCPriceFetcherServer) FetchPrice(ctx context.Context, req *proto.PriceRequest) (*proto.PriceResponse, error) {
+
+	reqid := rand.Intn(10000)
+	ctx = context.WithValue(ctx, "requestID", reqid)
 	price, err := s.svc.FetchPrice(ctx, req.Ticker)
 	if err != nil {
 		return nil, err
