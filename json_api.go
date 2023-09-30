@@ -46,6 +46,8 @@ func (s *JSONAPIServer) handleFetchPrice(ctx context.Context, w http.ResponseWri
 		return fmt.Errorf("invaild ticker")
 	}
 
+	// they will put everythin here
+
 	price, err := s.svc.FetchPrice(ctx, ticker)
 	if err != nil {
 		return err

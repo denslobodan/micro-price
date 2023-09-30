@@ -32,7 +32,7 @@ func (s *priceService) FetchPrice(_ context.Context, ticker string) (price float
 }
 
 type loggingService struct {
-	priceService
+	next priceService
 }
 
 func (s loggingService) FetchPrice(ctx context.Context, ticker string) (price float64, err error) {
@@ -48,5 +48,5 @@ func (s loggingService) FetchPrice(ctx context.Context, ticker string) (price fl
 		}).Info("FetchPrice")
 	}(time.Now())
 
-	return s.priceService.FetchPrice(ctx, ticker)
+	return s.next.FetchPrice(ctx, ticker)
 }
