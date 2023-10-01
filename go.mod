@@ -1,4 +1,4 @@
-module pricefetcher
+module github.com/denslobodan/micro-price
 
 go 1.21.1
 
