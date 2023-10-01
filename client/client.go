@@ -5,8 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"pricefetcher/proto"
-	"pricefetcher/types"
+
+	"github.com/denslobodan/micro-price/proto"
+	"github.com/denslobodan/micro-price/types"
 
 	"google.golang.org/grpc"
 )

@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
-	"pricefetcher/types"
+
+	"github.com/denslobodan/micro-price/types"
 )
 
 type APIFunc func(context.Context, http.ResponseWriter, *http.Request) error

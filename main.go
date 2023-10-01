@@ -9,9 +9,10 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"pricefetcher/client"
-	"pricefetcher/proto"
 	"time"
+
+	"github.com/denslobodan/micro-price/client"
+	"github.com/denslobodan/micro-price/proto"
 )
 
 func main() {

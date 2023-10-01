@@ -4,7 +4,8 @@ import (
 	"context"
 	"math/rand"
 	"net"
-	"pricefetcher/proto"
+
+	"github.com/denslobodan/micro-price/proto"
 
 	"google.golang.org/grpc"
 )
